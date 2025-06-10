@@ -1,4 +1,5 @@
 # Proyecto Final Computación en Internet 1 (Numeros Perfectos)
+Por: Santiago Zapata Rodriguez, Jose Miguel Armas y Juan Pablo Sinisterra
 
 **Requisitos previos**  
 - JDK 17 instalado 
