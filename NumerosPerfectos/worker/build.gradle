@@ -1,0 +1,5 @@
+// NumerosPerfectos/worker/build.gradle
+
+// El plugin java ya viene de subprojects en el root
+
+// No necesita dependencias adicionales más allá de ICE runtime

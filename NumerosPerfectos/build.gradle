@@ -1,0 +1,66 @@
+plugins {
+    id 'base'
+}
+
+allprojects {
+    group = 'demo'
+    version = '1.0'
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'application'  // Añade este plugin para obtener la tarea 'run'
+
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'com.zeroc:ice:3.7.10'
+    }
+
+    def sliceFile = rootProject.file('NumerosPerfectos.ice')
+    def genDir    = file("$buildDir/generated-src")
+
+    task generateStubs(type: Exec) {
+        inputs.file sliceFile
+        outputs.dir genDir
+        commandLine 'slice2java', '--output-dir', genDir, sliceFile
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDir genDir
+                srcDir 'src/main/java'
+            }
+        }
+    }
+
+    compileJava.dependsOn generateStubs
+}
+
+// Configura las clases main para cada módulo
+project(':client') {
+    application {
+        mainClass = 'Demo.Client'
+    }
+}
+
+project(':server') {
+    application {
+        mainClass = 'Demo.Server'
+    }
+}
+
+project(':worker') {
+    application {
+        mainClass = 'Demo.WorkerApp'
+    }
+}

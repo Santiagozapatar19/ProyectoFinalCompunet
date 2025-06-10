@@ -1,0 +1,8 @@
+// NumerosPerfectos/client/build.gradle
+
+// El plugin java ya viene de subprojects en el root
+
+dependencies {
+    // Cliente necesita los stubs del maestro
+    implementation project(':server')
+}
